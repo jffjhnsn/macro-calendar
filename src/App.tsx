@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import { Box } from './components/box'
@@ -6,12 +6,33 @@ import { Button } from './components/button'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [dateTime, setDateTime] = useState(new Date());
+  const today = new Date();
+  const daysOfYear: Date[] = [];
+
+  useEffect(() => {
+    const currentYear: number = today.getFullYear();
+    const startDate = new Date(currentYear, 0, 1);
+    const endDate = new Date(currentYear, 11, 31);
+
+    for (const d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
+      daysOfYear.push(new Date(d));
+    }
+
+  }, []);
+
+  useEffect(() => {
+      const intervalRef = setInterval(() => setDateTime(new Date()), 1000);
+      return () => {
+          clearInterval(intervalRef);
+      }
+  }, []);
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
+        <p>{`${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`}</p>
         <p>
           <button type="button" onClick={() => setCount((count) => count + 1)}>
             count is: {count}
@@ -26,7 +47,7 @@ function App() {
             borderRadius: '$round',
           }}
         >
-          Test
+          {`${today.toLocaleDateString()}`}
         </Box>
         <p>
           Edit <code>App.tsx</code> and save to test HMR updates.
