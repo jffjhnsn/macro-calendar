@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import { Box } from './components/box'
+import { Button } from './components/button'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,9 +17,21 @@ function App() {
             count is: {count}
           </button>
         </p>
+        <Box 
+          css={{
+            backgroundColor: '$blue',
+            color: '$white',
+            fontSize: '$2',
+            padding: '$3',
+            borderRadius: '$round',
+          }}
+        >
+          Test
+        </Box>
         <p>
           Edit <code>App.tsx</code> and save to test HMR updates.
         </p>
+        <Button>Is it working?</Button>
         <p>
           <a
             className="App-link"
