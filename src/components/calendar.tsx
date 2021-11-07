@@ -10,6 +10,12 @@ function Calendar() {
     const startDate = new Date(currentYear, 0, 1);
     const endDate = new Date(currentYear, 11, 31);
     
+    // pad first and last week with remaining days
+    const startOffset = startDate.getDay();
+    const endOffset = 6 - endDate.getDay();
+    startDate.setDate(startDate.getDate() - startOffset);
+    endDate.setDate(endDate.getDate() + endOffset);
+    
     for (const d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
       daysOfYear.push(new Date(d));
     }
