@@ -8,16 +8,9 @@ interface CalendarDay {
 }
 
 const Calendar = (props: { year: number }) => {
-  // const today = new Date();
-  // const [currentYear, setCurrentYear] = useState<number>(0);
-  // const [daysOfYear, setDaysOfYear] = useState<Date[][]>([]);
   const [calendarDays, setCalendarDays] = useState<CalendarDay[][]>([]);
-  // const daysOfYear: Date[][] = [];
-  // const [firstDayOfEachWeek, setFirstDayOfEachWeek] = useState<Date[]>([]);
 
   useEffect(() => {
-    // const currentYear: number = currentDate.getFullYear();
-    // setCurrentYear(new Date().getFullYear());
     const startDate = new Date(props.year, 0, 1);
     const endDate = new Date(props.year, 11, 31);
     
@@ -28,29 +21,18 @@ const Calendar = (props: { year: number }) => {
     endDate.setDate(endDate.getDate() + endOffset);
 
     const daysInYear: CalendarDay[][] = [];
-    // const firstDays = [];
     for (const w = startDate; w <= endDate; w.setDate(w.getDate() + 7)) {
-      // console.log("adding week of", w);
       const daysInWeek: CalendarDay[] = [];
       for (let i = 0; i < 7; i++) {
         const tmpDay = new Date(w);
         tmpDay.setDate(w.getDate() + i);
-        // daysInWeek.push(new Date(tmpDay));
         daysInWeek.push(dateToCalendarDay(tmpDay));
       }
-      // console.log(daysInWeek);
       daysInYear.push(daysInWeek);
     }
-    // setDaysOfYear(daysOfCurrentYear);
-    // daysOfYear.push(...daysOfCurrentYear);
     setCalendarDays(daysInYear);
-    // console.log(daysOfYear);
   }, [props.year]);
 
-  const getIdForDate = (date: Date) => {
-    return date.getFullYear() + '_' + date.getMonth() + '_' + date.getDate();
-  }
-  
   const getIdForDay = (day: CalendarDay) => {
     return day.year + '_' + day.month + '_' + day.day;
   }
@@ -72,36 +54,6 @@ const Calendar = (props: { year: number }) => {
       </TableCell>
     )
   }
-  
-  // const weekRows = daysOfYear.map(week => {
-  //   const days = week.map(day => generateDay(day));
-  //   console.log(getIdForDate(week[0]));
-  //   return (
-  //     <tr key={getIdForDate(week[0])}>
-  //       {days}
-  //     </tr>
-  //   )
-  // });
-  // const generateWeek = (firstDateOfWeek: Date) => {
-  //   const dates = [firstDateOfWeek];
-  //   let currentDate = new Date(firstDateOfWeek);
-  //   for (let i = 1; i < 7; i++) {
-  //     currentDate.setDate(currentDate.getDate() + 1);
-  //     dates.push(currentDate);
-  //   }
-  //   console.log(dates);
-  //   return (
-  //     <tr>
-  //       {dates.map((date: Date) =>
-  //         <td key={getIdForDate(date)}>
-  //           <span>
-  //             {date.getDate()}
-  //           </span>
-  //         </td>
-  //       )}
-  //     </tr>
-  //   )
-  // }
 
   return (
     <Table>
