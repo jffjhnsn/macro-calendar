@@ -47,7 +47,7 @@ const Calendar = (props: { year: number }) => {
   
   const generateDay = (day: CalendarDay) => {
     return (
-      <TableCell id={getIdForDay(day)}>
+      <TableCell id={getIdForDay(day)} className={day.day === 1 ? "shaded" : "normal"}>
         <span>
           {day.day}
         </span>
@@ -84,7 +84,8 @@ const Calendar = (props: { year: number }) => {
 }
 
 const Table = styled('table', {
-  display: 'block'
+  display: 'block',
+  fontSize: '$1',
 });
 
 const TableHead = styled('thead', {

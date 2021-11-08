@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        Compact Calendar
+        Compact Calendar {new Date().getFullYear()}
       </header>
       <main>
         <Calendar year={new Date().getFullYear()} />
