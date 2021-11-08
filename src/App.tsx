@@ -5,22 +5,14 @@ import { Button } from './components/button'
 import Calendar from './components/calendar'
 
 function App() {
-  const [dateTime, setDateTime] = useState(new Date());
-
-  useEffect(() => {
-      const intervalRef = setInterval(() => setDateTime(new Date()), 1000);
-      return () => {
-          clearInterval(intervalRef);
-      }
-  }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        <p>{`${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`}</p>
+        Compact Calendar
       </header>
       <main>
-        <Calendar />
+        <Calendar year={new Date().getFullYear()} />
       </main>
       <footer>
         <Box 
@@ -33,7 +25,7 @@ function App() {
               borderRadius: '$round',
             }}
           >
-            Hmm
+            {new Date().getFullYear()}
           </Box>
           <Button>Is it working?</Button>
       </footer>
