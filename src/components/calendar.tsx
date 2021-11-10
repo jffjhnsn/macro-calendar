@@ -118,7 +118,7 @@ const Calendar = (props: { year: number }) => {
         </TableRow>
       </TableHead>
       <TableBody> 
-        {calendarDays.map((week, index) => {
+        {calendarDays.map((week) => {
           const days = week.map(day => generateDay(day));
           console.log(getIdForDay(week[0]));
           return (
