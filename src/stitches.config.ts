@@ -17,12 +17,12 @@ export const { styled } = createStitches({
       sans: 'Inter, sans-serif',
     },
     fontSizes: {
-      1: '12px',
-      2: '14px',
-      3: '16px',
-      4: '20px',
-      5: '24px',
-      6: '32px',
+      1: '0.75rem',
+      2: '1rem',
+      3: '1.25rem',
+      4: '1.5rem',
+      5: '2rem',
+      6: '4rem',
     },
     space: {
       1: '4px',
@@ -55,4 +55,8 @@ export const { styled } = createStitches({
     zIndices: {},
     transitions: {},
   },
+  utils: {
+    marginX: (value: number) => ({ marginLeft: value, marginRight: value }),
+    paddingX: (value: number) => ({ paddingLeft: value, paddingRight: value }),
+  }
 });

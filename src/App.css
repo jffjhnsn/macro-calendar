@@ -40,5 +40,9 @@ button {
 
 .shaded {
   /* border: 1px solid white; */
-  background-color: darkolivegreen;
+  background-color: lightslategray;
+}
+
+.extra {
+  /* width: 80px; */
 }

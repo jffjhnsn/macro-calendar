@@ -44,10 +44,58 @@ const Calendar = (props: { year: number }) => {
       year: date.getFullYear(),
     }
   }
+
+  const writeMonth = (week: CalendarDay[]): string => {
+    const firstDay = week.find((day) => day.day === 1);
+    if (!firstDay) {
+      return "";
+    }
+    switch(firstDay.month) {
+      case 0: {
+        return "Jan";
+      }
+      case 1: {
+        return "Feb";
+      }
+      case 2: {
+        return "Mar";
+      }
+      case 3: {
+        return "Apr";
+      }
+      case 4: {
+        return "May";
+      }
+      case 5: {
+        return "Jun";
+      }
+      case 6: {
+        return "Jul";
+      }
+      case 7: {
+        return "Aug";
+      }
+      case 8: {
+        return "Sep";
+      }
+      case 9: {
+        return "Oct";
+      }
+      case 10: {
+        return "Nov";
+      }
+      case 11: {
+        return "Dec";
+      }
+      default: {
+        return "";
+      }
+    }
+  }
   
   const generateDay = (day: CalendarDay) => {
     return (
-      <TableCell id={getIdForDay(day)} className={day.day === 1 ? "shaded" : "normal"}>
+      <TableCell id={getIdForDay(day)} className={day.month % 2 === 0 ? "shaded" : "normal"}>
         <span>
           {day.day}
         </span>
@@ -66,15 +114,17 @@ const Calendar = (props: { year: number }) => {
           <TableHeader>T</TableHeader>
           <TableHeader>F</TableHeader>
           <TableHeader>S</TableHeader>
+          <TableHeader></TableHeader>
         </TableRow>
       </TableHead>
       <TableBody> 
-        {calendarDays.map(week => {
+        {calendarDays.map((week, index) => {
           const days = week.map(day => generateDay(day));
           console.log(getIdForDay(week[0]));
           return (
             <TableRow key={getIdForDay(week[0])}>
               {days}
+              <TableCell className="extra">{writeMonth(week)}</TableCell>
             </TableRow>
           )
         })}
@@ -85,6 +135,7 @@ const Calendar = (props: { year: number }) => {
 
 const Table = styled('table', {
   display: 'block',
+  borderCollapse: 'collapse',
   fontSize: '$1',
 });
 
@@ -93,7 +144,7 @@ const TableHead = styled('thead', {
 });
 
 const TableHeader = styled('th', {
-  
+  padding: '0 $1',
 });
 
 const TableBody = styled('tbody', {
@@ -105,7 +156,8 @@ const TableRow = styled('tr', {
 });
 
 const TableCell = styled('td', {
-  
+  fontSize: '$1',
+  padding: '0 $1',
 });
 
 export default Calendar;
